@@ -342,5 +342,56 @@ if __name__ == "__main__":
 
     # About Page
     elif st.session_state.page == "About":
-        st.title("Tentang Aplikasi")
-        st.write("Aplikasi ini dirancang untuk membantu dalam diagnosa penyakit respirasi menggunakan logika fuzzy.")
+        st.markdown("<div id='about'></div>", unsafe_allow_html=True)
+        
+        # Styling for the about container
+        st.markdown(
+            """
+            <style>
+            .about-container {
+                background-color: rgba(255, 255, 255, 0.9);
+                border-radius: 16px;
+                padding: 40px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                margin: 20px 0;
+                text-align: center;
+            }
+            .about-title {
+                color: #1F77B4;
+                font-size: 32px;
+                font-weight: bold;
+                margin-bottom: 30px;
+            }
+            .about-text {
+                color: #4A4A4A;
+                font-size: 18px;
+                line-height: 1.6;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            .about-highlight {
+                color: #1F77B4;
+                font-weight: bold;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
+        # About content
+        st.markdown(
+            """
+            <div class="about-container">
+                <div class="about-title">About</div>
+                <div class="about-text">
+                    <span class="about-highlight">Respirazzy</span> is a web-based Decision Support System (DSS) 
+                    designed to assist in the early detection and classification of 
+                    respiratory system diseases using Fuzzy Logic methodology. This 
+                    intelligent system integrates user-inputted symptoms with a fuzzy 
+                    inference engine to analyze and determine the most probable 
+                    diagnosis among 10 types of respiratory diseases.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
