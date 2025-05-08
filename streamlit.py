@@ -237,7 +237,7 @@ if __name__ == "__main__":
             """
             <style>
             .home-container {
-                background-color: #E0F7FA;
+                background-color: #FFFF;
                 border-radius: 16px;
                 padding: 20px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
