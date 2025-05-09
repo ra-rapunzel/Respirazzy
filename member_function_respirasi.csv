@@ -1,45 +1,45 @@
 ,kategori,Gejala,Kategori,Nilai,first,second,a,b,c,d
-0,umum,demam,normal,36.0-37.5°C,36.0,37.5,36.0,36.0,37.5,38.5
-1,umum,demam,sedang,37.0-39.0°C,37.0,39.0,37.5,38.5,38.5,39.5
-2,umum,demam,tinggi,38.5-41.0°C,38.5,41.0,38.5,39.5,41.0,41.03
-3,umum,sakit_kepala,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-4,umum,sakit_kepala,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
-5,umum,sakit_kepala,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
-6,Mulut dan Tenggorokan,nyeri_menelan,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-7,Mulut dan Tenggorokan,nyeri_menelan,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
-8,Mulut dan Tenggorokan,nyeri_menelan,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
-9,Mulut dan Tenggorokan,sakit_tenggorokan,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-10,Mulut dan Tenggorokan,sakit_tenggorokan,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
-11,Mulut dan Tenggorokan,sakit_tenggorokan,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
-12,Pernapasan,batuk,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-13,Pernapasan,batuk,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+0,umum,Demam,normal,36.0-37.5°C,36.0,37.5,36.0,36.0,37.5,38.5
+1,umum,Demam,sedang,37.0-39.0°C,37.0,39.0,37.5,38.5,38.5,39.5
+2,umum,Demam,tinggi,38.5-41.0°C,38.5,41.0,38.5,39.5,41.0,41.03
+3,umum,Sakit Kepala,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+4,umum,Sakit Kepala,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+5,umum,Sakit Kepala,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
+6,Mulut dan Tenggorokan,Nyeri Menelan,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+7,Mulut dan Tenggorokan,Nyeri Menelan,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+8,Mulut dan Tenggorokan,Nyeri Menelan,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
+9,Mulut dan Tenggorokan,Sakit Tenggorokan,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+10,Mulut dan Tenggorokan,Sakit Tenggorokan,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+11,Mulut dan Tenggorokan,Sakit Tenggorokan,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
+12,Pernapasan,Batuk,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+13,Pernapasan,Batuk,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
 14,Pernapasan,batuk,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
-15,Pernapasan,batuk_berdarah,negatif,0,0.0,0.0,0.0,0.0,0.0,0.0
-16,Pernapasan,batuk_berdarah,positif,1,1.0,1.0,1.0,1.0,1.0,1.0
-17,Pernapasan,dahak,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-18,Pernapasan,dahak,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
-19,Pernapasan,dahak,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
-20,Pernapasan,napas_mengi,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-21,Pernapasan,napas_mengi,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
-22,Pernapasan,napas_mengi,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
-23,Pernapasan,nyeri_dada,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-24,Pernapasan,nyeri_dada,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
-25,Pernapasan,nyeri_dada,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
-26,Pernapasan,sesak_napas,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-27,Pernapasan,sesak_napas,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
-28,Pernapasan,sesak_napas,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
-29,Telinga,nyeri_telinga,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-30,Telinga,nyeri_telinga,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
-31,Telinga,nyeri_telinga,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
-32,Hidung,hidung_berair,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-33,Hidung,hidung_berair,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
-34,Hidung,hidung_berair,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
-35,Hidung,hidung_tersumbat,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-36,Hidung,hidung_tersumbat,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
-37,Hidung,hidung_tersumbat,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
-38,Hidung,bersin,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-39,Hidung,bersin,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
-40,Hidung,bersin,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
-41,Hidung,hidung_gatal,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
-42,Hidung,hidung_gatal,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
-43,Hidung,hidung_gatal,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
+15,Pernapasan,Batuk Berdarah,negatif,0,0.0,0.0,0.0,0.0,0.0,0.0
+16,Pernapasan,Batuk Berdarah,positif,1,1.0,1.0,1.0,1.0,1.0,1.0
+17,Pernapasan,Dahak,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+18,Pernapasan,Dahak,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+19,Pernapasan,Dahak,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
+20,Pernapasan,Napas Mengi,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+21,Pernapasan,Napas Mengi,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+22,Pernapasan,Napas Mengi,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
+23,Pernapasan,Nyeri Dada,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+24,Pernapasan,Nyeri Dada,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+25,Pernapasan,Nyeri Dada,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
+26,Pernapasan,Sesak Nafas,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+27,Pernapasan,Sesak Nafas,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+28,Pernapasan,Sesak Nafas,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
+29,Telinga,Nyeri Telinga,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+30,Telinga,Nyeri Telinga,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+31,Telinga,Nyeri Telinga,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
+32,Hidung,Hidung Berair,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+33,Hidung,Hidung Berair,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+34,Hidung,Hidung Berair,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
+35,Hidung,Hidung Tersumbat,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+36,Hidung,Hidung Tersumbat,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+37,Hidung,Hidung Tersumbat,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
+38,Hidung,Bersin,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+39,Hidung,Bersin,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+40,Hidung,Bersin,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
+41,Hidung,Hidung Gatal,ringan,0.0-4.0,0.0,4.0,0.0,0.0,3.0,5.0
+42,Hidung,Hidung Gatal,sedang,3.0-7.0,3.0,7.0,3.0,5.0,5.0,7.0
+43,Hidung,Hidung Gatal,berat,5.0-10.0,5.0,10.0,5.0,7.0,10.0,10.0
