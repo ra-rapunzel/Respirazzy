@@ -4,6 +4,35 @@ import ast
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Ini adalah informasi penyakit yang akan ditampilkan
+DISEASE_INFO = {
+    "PPOK": {
+        "nama": "Penyakit Paru Obstruktif Kronis (PPOK)",
+        "deskripsi": "Penyakit progresif yang menyebabkan kesulitan bernapas akibat peradangan saluran napas.",
+        "gejala": ["Sesak napas kronis", "Batuk berdahak", "Mengi", "Rasa berat di dada"],
+        "penanganan": ["Berhenti merokok", "Bronkodilator", "Terapi oksigen", "Rehabilitasi paru"]
+    },
+    "Asma": {
+        "nama": "Asma",
+        "deskripsi": "Kondisi kronis yang menyebabkan peradangan dan penyempitan saluran napas.",
+        "gejala": ["Sesak napas", "Mengi", "Batuk-batuk", "Rasa tertekan di dada"],
+        "penanganan": ["Inhaler", "Menghindari pemicu", "Obat anti-inflamasi", "Manajemen stress"]
+    },
+    # Tambahkan informasi penyakit lainnya di sini contoh seperti di atas
+    "Pneumonia": {
+        "nama": "Pneumonia",
+        "deskripsi": "Infeksi yang menyebabkan peradangan pada kantung udara di satu atau kedua paru-paru.",
+        "gejala": ["Batuk", "Demam", "Sesak napas", "Nyeri dada saat bernapas"],
+        "penanganan": ["Antibiotik", "Obat penurun demam", "Istirahat yang cukup"]
+    },
+    "Bronkitis": {
+        "nama": "Bronkitis",
+        "deskripsi": "Peradangan pada saluran bronkus yang menghubungkan trakea dengan paru-paru.",
+        "gejala": ["Batuk kering", "Sesak napas", "Nyeri dada", "Kelelahan"],
+        "penanganan": ["Obat batuk", "Antibiotik (jika infeksi bakteri)", "Inhaler"]
+    },
+}
+
 # Konfigurasi halaman harus menjadi command Streamlit pertama
 st.set_page_config(page_title="Respirazzy", page_icon="🩺", layout="wide")
 
@@ -245,6 +274,8 @@ if __name__ == "__main__":
         st.session_state.page = "Home"
     if st.sidebar.button("Diagnosis", key="diagnosis_button"):
         st.session_state.page = "Diagnosis"
+    if st.sidebar.button("Informasi", key="info_button"):
+        st.session_state.page = "Informasi"
     if st.sidebar.button("About", key="about_button"):
         st.session_state.page = "About"
 
@@ -334,7 +365,6 @@ if __name__ == "__main__":
 
             # Display Results
             st.subheader("Hasil Diagnosis")
-            st.markdown("### Result")
 
             # Create DataFrame for Table - Only top 3
             top3_data = {
@@ -343,31 +373,99 @@ if __name__ == "__main__":
             }
             df = pd.DataFrame(top3_data)
 
-            # Display Table
-            col1, col2 = st.columns([2, 1])
+            # Display Table and Chart in more compact layout
+            col1, col2 = st.columns([1.2, 1])
             with col1:
                 for index, row in df.iterrows():
                     st.markdown(
-                        f"<div style='display: flex; align-items: center;'>"
-                        f"  <div style='flex: 1; padding-right: 10px;'>{row['Penyakit']}</div>"
-                        f"  <div style='background-color: #1F77B4; color: white; padding: 5px 10px; border-radius: 5px;'>{row['Kemungkinan (%)']:.1f}%</div>"
-                        f"</div>",
+                        f"""
+                        <div style='display: flex; align-items: center; margin-bottom: 5px; background-color: rgba(255,255,255,0.1); padding: 10px; border-radius: 5px;'>
+                            <div style='flex: 1;'>{row['Penyakit']}</div>
+                            <div style='background-color: #1F77B4; color: white; padding: 5px 10px; border-radius: 5px; margin-left: 10px;'>{row['Kemungkinan (%)']:.1f}%</div>
+                        </div>
+                        """,
                         unsafe_allow_html=True,
                     )
 
-            # Create and Display Pie Chart - Only top 3
             with col2:
-                fig, ax = plt.subplots()
+                # Set figure with transparent background
+                fig, ax = plt.subplots(figsize=(5, 4), facecolor='none')
                 ax.pie(
                     df["Kemungkinan (%)"],
                     labels=df["Penyakit"],
-                    autopct="%1.1f%%",
+                    autopct='%1.1f%%',
                     startangle=90,
                     colors=plt.cm.Blues(np.linspace(0.3, 0.8, len(df))),
-                    textprops={"color": "black"},
+                    textprops={'color': 'black', 'fontsize': 9},
+                    labeldistance=0.6,  # Bring labels closer to center
+                    pctdistance=0.45,   # Bring percentages closer to center
                 )
-                ax.axis("equal")
+                ax.axis('equal')
+                
+                # Make plot background transparent
+                fig.patch.set_alpha(0.0)
+                ax.set_facecolor('none')
+                
+                # Add tight layout to remove extra whitespace
+                plt.tight_layout()
+                
                 st.pyplot(fig)
+
+    # Informasi Page
+    elif st.session_state.page == "Informasi":
+        st.title("Informasi Penyakit Pernapasan")
+        
+        # Styling for disease info cards
+        st.markdown("""
+        <style>
+        .disease-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .disease-title {
+            color: #1F77B4;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .section-title {
+            color: #155799;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .info-text {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .symptom-list {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
+        # Tampilannya disini
+        for disease_key, info in DISEASE_INFO.items():
+            st.markdown(f"""
+            <div class="disease-card">
+                <div class="disease-title">{info['nama']}</div>
+                <div class="section-title">Deskripsi:</div>
+                <div class="info-text">{info['deskripsi']}</div>
+                <div class="section-title">Gejala Utama:</div>
+                <ul class="symptom-list">
+                    {''.join(f'<li class="info-text">{gejala}</li>' for gejala in info['gejala'])}
+                </ul>
+                <div class="section-title">Penanganan:</div>
+                <ul class="symptom-list">
+                    {''.join(f'<li class="info-text">{penanganan}</li>' for penanganan in info['penanganan'])}
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
 
     # About Page
     elif st.session_state.page == "About":
