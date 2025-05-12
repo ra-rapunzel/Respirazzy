@@ -31,6 +31,12 @@ DISEASE_INFO = {
         "gejala": ["Batuk kering", "Sesak napas", "Nyeri dada", "Kelelahan"],
         "penanganan": ["Obat batuk", "Antibiotik (jika infeksi bakteri)", "Inhaler"]
     },
+    "ISPA": {
+        "nama": "ISPA",
+        "deskripsi": "lorepisum.",
+        "gejala": ["Batuk kering", "Sesak napas", "Nyeri dada", "Kelelahan"],
+        "penanganan": ["Obat batuk", "Antibiotik (jika infeksi bakteri)", "Inhaler"]
+    },
 }
 
 # Konfigurasi halaman harus menjadi command Streamlit pertama
