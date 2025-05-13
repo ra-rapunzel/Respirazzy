@@ -362,7 +362,7 @@ if __name__ == "__main__":
                             <img src="https://cdn.vectorstock.com/i/500p/41/86/anatomical-medical-scheme-respiratory-system-vector-26874186.jpg" alt="Respiratory Health Illustration" style="max-width: 100%; height: auto;">
                         </div>
                         <div class="home-text">
-                            <h1>SMART DIAGNOSIS FOR RESPIRATORY HEALTH</h1>
+                            <h3>SMART DIAGNOSIS FOR RESPIRATORY HEALTH</h3>
                             <p>Detect 10 types of respiratory diseases instantly using fuzzy logic.</p>
                         </div>
                     </div>
