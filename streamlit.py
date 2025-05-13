@@ -34,7 +34,7 @@ DISEASE_INFO = {
     "ISPA": {
         "nama": "ISPA",
         "deskripsi": "lorepisum.",
-        "gejala": ["Batuk kering", "Sesak napas", "Nyeri dada", "Kelelahan"],
+        "gejala": ["Batuk kering", "Sesak napas", "Nyeri dada"],
         "penanganan": ["Obat batuk", "Antibiotik (jika infeksi bakteri)", "Inhaler"]
     },
 }
