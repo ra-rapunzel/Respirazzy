@@ -37,6 +37,24 @@ DISEASE_INFO = {
         "gejala": ["Batuk kering", "Sesak napas", "Nyeri dada"],
         "penanganan": ["Obat batuk", "Antibiotik (jika infeksi bakteri)", "Inhaler"]
     },
+    "Common_Cold": {
+        "nama": "Common Cold",
+        "deskripsi": "lorepisum.",
+        "gejala": ["Batuk kering", "Sesak napas", "Nyeri dada"],
+        "penanganan": ["Obat batuk", "Antibiotik (jika infeksi bakteri)", "Inhaler"]
+    },
+    "Faringitis_Akut": {
+        "nama": "Faringitis Akut",
+        "deskripsi": "lorepisum.",
+        "gejala": ["Batuk kering", "Sesak napas", "Nyeri dada"],
+        "penanganan": ["Obat batuk", "Antibiotik (jika infeksi bakteri)", "Inhaler"]
+    },
+    "Tonsilitis_Akut": {
+        "nama": "Tonsilitis Akut",
+        "deskripsi": "lorepisum.",
+        "gejala": ["Batuk kering", "Sesak napas", "Nyeri dada"],
+        "penanganan": ["Obat batuk", "Antibiotik (jika infeksi bakteri)", "Inhaler"]
+    },
 }
 
 # Konfigurasi halaman harus menjadi command Streamlit pertama
