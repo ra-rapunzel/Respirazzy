@@ -109,14 +109,22 @@ def get_user_inputs(mf, cmap):
     """
     inp = {}
     for grp, gs in cmap.items():
-        st.subheader(f"{grp.capitalize()}:")
-        for g in sorted(gs):
+        st.subheader(f"{grp.title()}")
+        col1, col2 = st.columns([1, 1])
+        for i, g in enumerate(sorted(gs)):
             if g not in mf:
                 continue
             pts = [p for (a, b, c) in mf[g].values() for p in (a, b, c)]
             lo, hi = min(pts), max(pts)
-            v = st.number_input(f"  - {g} ({lo:.1f}–{hi:.1f})", value=(lo + hi) / 2.0, min_value=lo, max_value=hi, step=0.1)
-            inp[g] = v
+            default = (lo + hi) / 2
+            step = 0.1 if hi - lo <= 10 else 0.5
+            with col1 if i % 2 == 0 else col2:
+                with st.container():
+                    st.markdown(f'<div style="background-color: #f0f2f6; border-radius: 10px; margin-bottom: 10px;">', unsafe_allow_html=True)
+                    st.markdown(f"**{g.title()} ({lo:.1f}–{hi:.1f})**")
+                    value = st.number_input("", min_value=lo, max_value=hi, value=default, step=step, key=g)
+                    inp[g] = value
+                    st.markdown("</div>", unsafe_allow_html=True)
     return inp
 
 # --- 4. Fungsi Pembantu ---
