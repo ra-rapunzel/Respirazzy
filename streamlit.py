@@ -214,9 +214,9 @@ def get_top_diagnoses(per_disease, y_domain):
 label_map = {
     "demam": "Suhu Tubuh (°C)",
     "sakit_kepala": "Sakit Kepala",
-    "nyeri_menelan": "Rasa Nyeri Saat Menelan",
-    "pembengkakan_amandel": "Pembengkakan atau Radang Amandel",
-    "sakit_tenggorokan": "Sakit Area Tenggorokan",
+    "nyeri_menelan": "Nyeri Saat Menelan",
+    "pembengkakan_amandel": "Pembengkakan Amandel",
+    "sakit_tenggorokan": "Sakit Tenggorokan",
     "batuk": "Batuk",
     "dahak": "Dahak",
     "napas_mengi": "Napas Mengi",
