@@ -1,0 +1,43 @@
+,kategori,Gejala,Kategori,Nilai,first,second,a,b,c
+0,Gejala Umum,demam,normal,36.0–37.5°C,36.0,37.5,36.0,36.75,37.5
+1,Gejala Umum,demam,sedang,37.0–39.0°C,37.0,39.0,37.0,38.0,39.0
+2,Gejala Umum,demam,tinggi,38.5–41.0°C,38.5,41.0,38.5,39.75,41.0
+3,Gejala Umum,sakit_kepala,ringan,0.0–4.0,0.0,4.0,0.0,2.0,4.0
+4,Gejala Umum,sakit_kepala,sedang,3.0–7.0,3.0,7.0,3.0,5.0,7.0
+5,Gejala Umum,sakit_kepala,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0
+6,Mulut dan Tenggorokan,nyeri_menelan,ringan,0.0–4.0,0,4,0,2,4
+7,Mulut dan Tenggorokan,nyeri_menelan,sedang,3.0–7.0,3,7,3,5,7
+8,Mulut dan Tenggorokan,nyeri_menelan,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0
+9,Mulut dan Tenggorokan,sakit_tenggorokan,ringan,0.0–4.0,0,4,0,2,4
+10,Mulut dan Tenggorokan,sakit_tenggorokan,sedang,3.0–7.0,3,7,3,5,7
+11,Mulut dan Tenggorokan,sakit_tenggorokan,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0
+12,Mulut dan Tenggorokan,pembengkakan_amandel,ringan,0.0–4.0,0,4,0,2,4
+13,Mulut dan Tenggorokan,pembengkakan_amandel,sedang,3.0–7.0,3,7,3,5,7
+14,Mulut dan Tenggorokan,pembengkakan_amandel,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0
+15,Pernapasan,batuk,ringan,0.0–4.0,0,4,0,2,4
+16,Pernapasan,batuk,sedang,3.0–7.0,3,7,3,5,7
+17,Pernapasan,batuk,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0
+18,Pernapasan,dahak,ringan,0.0–4.0,0,4,0,2,4
+19,Pernapasan,dahak,sedang,3.0–7.0,3,7,3,5,7
+20,Pernapasan,dahak,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0
+21,Pernapasan,napas_mengi,ringan,0.0–4.0,0,4,0,2,4
+22,Pernapasan,napas_mengi,sedang,3.0–7.0,3,7,3,5,7
+23,Pernapasan,napas_mengi,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0
+24,Pernapasan,nyeri_dada,ringan,0.0–4.0,0,4,0,2,4
+25,Pernapasan,nyeri_dada,sedang,3.0–7.0,3,7,3,5,7
+26,Pernapasan,nyeri_dada,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0
+27,Pernapasan,sesak_napas,ringan,0.0–4.0,0,4,0,2,4
+28,Pernapasan,sesak_napas,sedang,3.0–7.0,3,7,3,5,7
+29,Pernapasan,sesak_napas,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0
+30,Hidung,hidung_berair,ringan,0.0–4.0,0,4,0,2,4
+31,Hidung,hidung_berair,sedang,3.0–7.0,3,7,3,5,7
+32,Hidung,hidung_berair,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0
+33,Hidung,hidung_tersumbat,ringan,0.0–4.0,0,4,0,2,4
+34,Hidung,hidung_tersumbat,sedang,3.0–7.0,3,7,3,5,7
+35,Hidung,hidung_tersumbat,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0
+36,Hidung,bersin,ringan,0.0–4.0,0,4,0,2,4
+37,Hidung,bersin,sedang,3.0–7.0,3,7,3,5,7
+38,Hidung,bersin,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0
+39,Hidung,hidung_gatal,ringan,0.0–4.0,0,4,0,2,4
+40,Hidung,hidung_gatal,sedang,3.0–7.0,3,7,3,5,7
+41,Hidung,hidung_gatal,berat,6.0–10.0,6.0,10.0,6.0,8.0,10.0

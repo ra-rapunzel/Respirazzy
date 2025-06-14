@@ -455,7 +455,7 @@ if __name__ == "__main__":
         <h4 style='color: #1F77B4; margin-bottom: 10px;'>📋 Petunjuk Pengisian</h4>
         <ul style='font-size: 16px; color: #1a1a1a; line-height: 1.6; margin-left: 20px;'>
             <li>Masukkan <strong>suhu tubuh</strong> Pasien (dalam °C) sesuai kondisi saat ini.</li>
-            <li>Isi <strong>tingkat keparahan gejala</strong> lainnya pada rentang nilai <strong>0 hingga 10</strong> (semakin besar nilai maka gejala semakin parah).</li>
+            <li>Isi <strong>tingkat keparahan gejala</strong> lainnya pada skala <strong>0 hingga 10</strong>.</li>
             <li>Jika Pasien <strong>tidak mengalami gejala tertentu</strong>, isi dengan nilai <strong>0</strong>.</li>
             <li>Input dapat berupa <strong>bilangan desimal</strong> (misalnya: 5.5, 7.0).</li>
             <li>Gunakan tombol <strong>–</strong> dan <strong>+</strong> di sisi kanan input untuk mengurangi atau menambah nilai.</li>

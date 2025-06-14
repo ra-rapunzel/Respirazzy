@@ -116,7 +116,35 @@ def load_rules_with_weights(path):
         rules.append((conds, weights, r['nama_penyakit']))
     return rules
 
-# --- 3. Triangular Membership Function ---
+# --- 3. Input Gejala dari Pengguna ---
+def get_user_inputs(mf, cmap):
+    """
+    Mengambil input gejala dari pengguna melalui antarmuka Streamlit.
+    Returns:
+        inp: Dictionary nilai input untuk setiap gejala
+    """
+    inp = {}
+    for grp, gs in cmap.items():
+        st.subheader(f"{grp.title()}")
+        col1, col2, col3, col4 = st.columns(4)
+        cols = [col1, col2, col3, col4]
+        for i, g in enumerate(sorted(gs)):
+            if g not in mf:
+                continue
+            pts = [p for (a, b, c) in mf[g].values() for p in (a, b, c)]
+            lo, hi = min(pts), max(pts)
+            default = (lo + hi) / 2
+            step = 0.1 if hi - lo <= 10 else 0.5
+            with cols[i % 4]:  # menentukan kolom berdasarkan indeks
+                with st.container():
+                    st.markdown(f'<div style="background-color: #f0f2f6; border-radius: 10px; margin-bottom: 10px;">', unsafe_allow_html=True)
+                    st.markdown(f"**{g.title()} ({lo:.1f}–{hi:.1f})**")
+                    value = st.number_input(label=f"{g}", min_value=lo, max_value=hi, value=default, step=step, key=g)
+                    inp[g] = value
+                    st.markdown("</div>", unsafe_allow_html=True)
+    return inp
+
+# --- 4. Fungsi Pembantu ---
 def var_and_set_name(tok):
     """Memisahkan nama variabel dan set dari token"""
     parts = tok.split('_')
@@ -140,20 +168,8 @@ def trimf(x, params):
         return (x - a) / (b - a)
     return (c - x) / (c - b)
 
-# --- 4. Implikasi Mamdani ---
-def implication(alpha, params, y):
-    return np.minimum(alpha, np.array([trimf(val, params) for val in y]))
-
-# --- 5. Defuzzifikasi MoM ---
-def defuzzify_mom(y, mu):
-    max_mu = np.max(mu)
-    if max_mu == 0:
-        return 0.0
-    y_max = y[mu == max_mu]
-    return (y_max[0] + y_max[-1]) / 2
-
-# --- 6. Inferensi Fuzzy dengan Bobot dan Pelacakan ---
-def fuzzy_inference_mamdani_weighted(inputs, mf, rules, output_mf, y_domain):
+# --- 5. Inferensi Fuzzy dengan Bobot dan Pelacakan ---
+def fuzzy_inference_confidence_weighted_with_trace(inputs, mf, rules):
     """
     Melakukan inferensi fuzzy dengan bobot dan pelacakan proses.
     Returns:
@@ -167,98 +183,41 @@ def fuzzy_inference_mamdani_weighted(inputs, mf, rules, output_mf, y_domain):
             mu = trimf(x, params)
             fuzzy_vals[var][setn] = mu
 
-    aggregated = np.zeros_like(y_domain)
-    per_disease = {}
-
+    raw_degrees = {}
     for conds, weights, disease in rules:
-        match_vals = []
-        for cond in conds:
-            var, setn = var_and_set_name(cond)
+        base_strength = 0.0
+        match_count = 0
+        for c, w in zip(conds, weights):
+            var, setn = var_and_set_name(c)
             mu = fuzzy_vals.get(var, {}).get(setn, 0.0)
-            match_vals.append(mu)
-        if not match_vals:
-            alpha = 0
-        else:
-            alpha = sum(mu * w for mu, w in zip(match_vals, weights)) / sum(weights)
+            if mu > 0:
+                match_count += 1
+            contrib = mu * w
+            base_strength += contrib
+        match_ratio = match_count / len(conds) if conds else 0
+        boosted_strength = base_strength * (1 + match_ratio)
+        raw_degrees[disease] = boosted_strength
 
-        clipped = implication(alpha, output_mf[disease], y_domain)
-        aggregated = np.maximum(aggregated, clipped)
-        if disease not in per_disease:
-            per_disease[disease] = clipped
-        else:
-            per_disease[disease] = np.maximum(per_disease[disease], clipped)
+    return fuzzy_vals, raw_degrees
 
-    z_star = defuzzify_mom(y_domain, aggregated)
-    return z_star, per_disease, aggregated
-
-
-# --- 7. Normalisasi N Teratas ---
-def get_top_diagnoses(per_disease, y_domain):
+# --- 6. Normalisasi N Teratas ---
+def normalize_top_n(raw_degrees, n=3):
     """
     Menormalisasi dan mengambil n hasil teratas.
     Returns:
         confidences: Dictionary persentase kepercayaan
         top_n: List n penyakit teratas
     """
-    scores = {}
-    for disease, mu in per_disease.items():
-        max_mu = np.max(mu)
-        if max_mu > 0:
-            scores[disease] = max_mu
-    sorted_top = sorted(scores.items(), key=lambda x: x[1], reverse=True)[:3]
-    top_total = sum(v for _, v in sorted_top)
-    return [(d, v, 100 * v / top_total if top_total else 0) for d, v in sorted_top]
-
-# --- 8. Input Gejala dari Pengguna ---
-
-label_map = {
-    "demam": "Suhu Tubuh (°C)",
-    "sakit_kepala": "Sakit Kepala",
-    "nyeri_menelan": "Nyeri Saat Menelan",
-    "pembengkakan_amandel": "Pembengkakan Amandel",
-    "sakit_tenggorokan": "Sakit Tenggorokan",
-    "batuk": "Batuk",
-    "dahak": "Dahak",
-    "napas_mengi": "Napas Mengi (Bunyi Napas)",
-    "nyeri_dada": "Nyeri pada Dada",
-    "sesak_napas": "Sesak saat Bernapas",
-    "bersin": "Bersin-Bersin",
-    "hidung_berair": "Hidung Berair (Pilek)",
-    "hidung_gatal": "Hidung Terasa Gatal",
-    "hidung_tersumbat": "Hidung Tersumbat"
-}
-
-def get_user_inputs(mf, cmap):
-    """
-    Mengambil input gejala dari pengguna melalui antarmuka Streamlit.
-    Returns:
-    inp: Dictionary nilai input untuk setiap gejala
-    """
-    inp = {}
-    for grp, gs in cmap.items():
-        st.subheader(f"{grp.title()}")
-        col1, col2, col3, col4 = st.columns(4)
-        cols = [col1, col2, col3, col4]
-        for i, g in enumerate(sorted(gs)):
-            if g not in mf:
-                continue
-            pts = [p for (a, b, c) in mf[g].values() for p in (a, b, c)]
-            lo, hi = min(pts), max(pts)
-            default = lo
-            step = 0.1 if hi - lo <= 10 else 0.5
-            with cols[i % 4]:
-                with st.container():
-                    st.markdown(f'<div style="background-color: #f0f2f6; border-radius: 10px; margin-bottom: 10px; padding: 5px;">', unsafe_allow_html=True)
-                    label = label_map.get(g, g.replace('_', ' ').title())
-                    st.markdown(
-                        f"<div style='font-weight: bold; font-size: 16px; color: #155799; margin-bottom: 5px;'>"
-                        f"{label} ({lo:.1f}–{hi:.1f})</div>",
-                        unsafe_allow_html=True
-                    )
-                    value = st.number_input(label="", min_value=lo, max_value=hi, value=default, step=step, key=g)
-                    inp[g] = value
-                    st.markdown("</div>", unsafe_allow_html=True)
-    return inp
+    sorted_raw = sorted(raw_degrees.items(), key=lambda x: -x[1])
+    top_n = [d for d, _ in sorted_raw][:n]
+    total_top = sum(raw_degrees[d] for d in top_n)
+    if total_top > 0:
+        return {
+            d: (raw_degrees[d] / total_top) * 100 if d in top_n else 0.0
+            for d in raw_degrees
+        }, top_n
+    else:
+        return {d: 0.0 for d in raw_degrees}, []
 
 # --- 7. Program Utama ---
 if __name__ == "__main__":
@@ -370,15 +329,10 @@ if __name__ == "__main__":
         st.session_state.page = "About"
 
     # Memuat data dan inisialisasi
-    mf = "revisi_member_function.csv"
-    rules_file = "rules_bobot_respirasi.csv"
-    output_mf_file = "output_member_function.csv"
-
-    mf, cmap = load_membership_functions(mf)
-    rules = load_rules_with_weights(rules_file)
-    output_df = pd.read_csv(output_mf_file)
-    output_mf = {r['penyakit']: (r['a'], r['b'], r['c']) for _, r in output_df.iterrows()}
-    y_domain = np.linspace(0, 10, 1000)
+    mf_file = "revisi_member_function.csv"
+    rule_file = "rules_bobot_respirasi.csv"
+    mf, cmap = load_membership_functions(mf_file)
+    rules = load_rules_with_weights(rule_file)
 
     # Home Page
     if st.session_state.page == "Home":
@@ -433,8 +387,8 @@ if __name__ == "__main__":
                             <img src="https://cdn.vectorstock.com/i/500p/41/86/anatomical-medical-scheme-respiratory-system-vector-26874186.jpg" alt="Respiratory Health Illustration" style="max-width: 100%; height: auto;">
                         </div>
                         <div class="home-text">
-                            <h3 style="font-size: 40px; font-weight: bold;">SMART DIAGNOSIS FOR RESPIRATORY HEALTH</h3>
-                            <p style="font-size: 20px; color: #333;">Detect 10 types of respiratory diseases instantly using fuzzy inference system.</p>
+                            <h3>SMART DIAGNOSIS FOR RESPIRATORY HEALTH</h3>
+                            <p>Detect 10 types of respiratory diseases instantly using fuzzy logic.</p>
                         </div>
                     </div>
                 </div>
@@ -448,40 +402,25 @@ if __name__ == "__main__":
 
     # Diagnosis Page
     elif st.session_state.page == "Diagnosis":
-        st.title("Diagnosis Penyakit Respirasi Menggunakan Fuzzy Inference System")
-        st.markdown(
-    """
-    <div style='padding: 20px; background-color: #e6f2fa; border-left: 6px solid #1F77B4; border-radius: 8px; margin-top: 15px;'>
-        <h4 style='color: #1F77B4; margin-bottom: 10px;'>📋 Petunjuk Pengisian</h4>
-        <ul style='font-size: 16px; color: #1a1a1a; line-height: 1.6; margin-left: 20px;'>
-            <li>Masukkan <strong>suhu tubuh</strong> Pasien (dalam °C) sesuai kondisi saat ini.</li>
-            <li>Isi <strong>tingkat keparahan gejala</strong> lainnya pada rentang nilai <strong>0 hingga 10</strong> (semakin besar nilai maka gejala semakin parah).</li>
-            <li>Jika Pasien <strong>tidak mengalami gejala tertentu</strong>, isi dengan nilai <strong>0</strong>.</li>
-            <li>Input dapat berupa <strong>bilangan desimal</strong> (misalnya: 5.5, 7.0).</li>
-            <li>Gunakan tombol <strong>–</strong> dan <strong>+</strong> di sisi kanan input untuk mengurangi atau menambah nilai.</li>
-            <li>Setelah semua terisi, klik tombol <strong>“Diagnosis”</strong> untuk melihat hasil analisis.</li>
-        </ul>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+        st.title("Diagnosis Penyakit Respirasi menggunakan Logika Fuzzy")
 
         # Get User Inputs
         inputs = get_user_inputs(mf, cmap)
 
         # Perform Fuzzy Inference
         if st.button("Diagnosis", key="diagnosis_run_button"):
-            z_star, per_disease, aggregated = fuzzy_inference_mamdani_weighted(inputs, mf, rules, output_mf, y_domain)
-            top3_result = get_top_diagnoses(per_disease, y_domain)
+            fuzzy_vals, raw_degrees = fuzzy_inference_confidence_weighted_with_trace(inputs, mf, rules)
+            confidences, top3 = normalize_top_n(raw_degrees, n=3)
 
             # Display Results
             st.subheader("Hasil Diagnosis")
 
             # Create DataFrame for Table - Only top 3
-            df = pd.DataFrame({
-                "Penyakit": [d for d, _, _ in top3_result],
-                "Kemungkinan (%)": [p for _, _, p in top3_result]
-            })
+            top3_data = {
+                "Penyakit": [disease for disease in top3],
+                "Kemungkinan (%)": [confidences[disease] for disease in top3]
+            }
+            df = pd.DataFrame(top3_data)
 
             # Display Table and Chart in more compact layout
             col1, col2 = st.columns([1.2, 1])
@@ -489,11 +428,11 @@ if __name__ == "__main__":
                 for index, row in df.iterrows():
                     st.markdown(
                         f"""
-                            <div style='display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; background-color: rgba(255,255,255,0.1); padding: 12px; border-radius: 5px; font-size: 18px; font-weight: 500;'>
-                            <div>{row['Penyakit'].capitalize()}</div>
-                            <div style='background-color: #1F77B4; color: white; padding: 6px 12px; border-radius: 5px; font-size: 16px; font-weight: bold;'>{row['Kemungkinan (%)']:.1f}%</div>
+                        <div style='display: flex; align-items: center; margin-bottom: 5px; background-color: rgba(255,255,255,0.1); padding: 10px; border-radius: 5px;'>
+                            <div style='flex: 1;'>{row['Penyakit']}</div>
+                            <div style='background-color: #1F77B4; color: white; padding: 5px 10px; border-radius: 5px; margin-left: 10px;'>{row['Kemungkinan (%)']:.1f}%</div>
                         </div>
-                         """,
+                        """,
                         unsafe_allow_html=True,
                     )
 
@@ -619,9 +558,12 @@ if __name__ == "__main__":
             <div class="about-container">
                 <div class="about-title">About</div>
                 <div class="about-text">
-                    <span class="about-highlight">Respirazzy</span> adalah Sistem Pendukung Keputusan (Decision Support System) berbasis website
-                    yang dirancang untuk membantu dalam deteksi dini dan klasifikasi penyakit pada sistem pernapasan menggunakan metode Fuzzy Inference System.
-                    Sistem cerdas ini mengintegrasikan gejala yang diinput oleh pengguna dengan untuk menganalisis dan menentukan diagnosis yang paling mungkin dari 10 jenis penyakit pernapasan.
+                    <span class="about-highlight">Respirazzy</span> is a web-based Decision Support System (DSS) 
+                    designed to assist in the early detection and classification of 
+                    respiratory system diseases using Fuzzy Logic methodology. This 
+                    intelligent system integrates user-inputted symptoms with a fuzzy 
+                    inference engine to analyze and determine the most probable 
+                    diagnosis among 10 types of respiratory diseases.
                 </div>
             </div>
             """,
