@@ -358,16 +358,16 @@ if __name__ == "__main__":
 
     # Sidebar Navigation
     if "page" not in st.session_state:
-        st.session_state.page = "Home"
+        st.session_state.page = "Beranda"
 
-    if st.sidebar.button("Home", key="home_button"):
-        st.session_state.page = "Home"
+    if st.sidebar.button("Beranda", key="beranda_button"):
+        st.session_state.page = "Beranda"
     if st.sidebar.button("Diagnosis", key="diagnosis_button"):
         st.session_state.page = "Diagnosis"
     if st.sidebar.button("Informasi", key="info_button"):
         st.session_state.page = "Informasi"
-    if st.sidebar.button("About", key="about_button"):
-        st.session_state.page = "About"
+    if st.sidebar.button("Tentang", key="Tentang_button"):
+        st.session_state.page = "Tentang"
 
     # Memuat data dan inisialisasi
     mf = "revisi_member_function.csv"
@@ -380,40 +380,40 @@ if __name__ == "__main__":
     output_mf = {r['penyakit']: (r['a'], r['b'], r['c']) for _, r in output_df.iterrows()}
     y_domain = np.linspace(0, 10, 1000)
 
-    # Home Page
-    if st.session_state.page == "Home":
-        st.markdown("<div id='home'></div>", unsafe_allow_html=True)
+    # Beranda Page
+    if st.session_state.page == "Beranda":
+        st.markdown("<div id='Beranda'></div>", unsafe_allow_html=True)
 
         # Styling for the container
         st.markdown(
             """
             <style>
-            .home-container {
+            .Beranda-container {
                 background-color: #FFFF;
                 border-radius: 16px;
                 padding: 20px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 margin-bottom: 20px;
             }
-            .home-content {
+            .Beranda-content {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
             }
-            .home-text {
+            .Beranda-text {
                 flex: 1;
                 padding-right: 20px;
             }
-            .home-image {
+            .Beranda-image {
                 flex: 1;
                 text-align: center;
             }
-            .home-container h1 {
+            .Beranda-container h1 {
                 font-size: 36px;
                 color: #1F77B4;
                 margin-bottom: 10px;
             }
-            .home-container p {
+            .Beranda-container p {
                 font-size: 18px;
                 color: #333;
                 margin-bottom: 20px;
@@ -423,18 +423,18 @@ if __name__ == "__main__":
             unsafe_allow_html=True
         )
 
-        # Container for home content
+        # Container for Beranda content
         with st.container():
             st.markdown(
                 """
-                <div class="home-container">
-                    <div class="home-content">
-                        <div class="home-image">
+                <div class="Beranda-container">
+                    <div class="Beranda-content">
+                        <div class="Beranda-image">
                             <img src="https://cdn.vectorstock.com/i/500p/41/86/anatomical-medical-scheme-respiratory-system-vector-26874186.jpg" alt="Respiratory Health Illustration" style="max-width: 100%; height: auto;">
                         </div>
-                        <div class="home-text">
-                            <h3 style="font-size: 40px; font-weight: bold;">SMART DIAGNOSIS FOR RESPIRATORY HEALTH</h3>
-                            <p style="font-size: 20px; color: #333;">Detect 10 types of respiratory diseases instantly using fuzzy inference system.</p>
+                        <div class="Beranda-text">
+                            <h3 style="font-size: 40px; font-weight: bold;"> DIAGNOSIS PINTAR UNTUK KESEHATAN SISTEM PERNAPASAN</h3>
+                            <p style="font-size: 20px; color: #333;">Mendeteksi 10 jenis penyakit saluran pernapasan dengan menggunakan fuzzy inference system.</p>
                         </div>
                     </div>
                 </div>
@@ -443,7 +443,7 @@ if __name__ == "__main__":
             )
             
             # Keep the existing button functionality
-            if st.button("START DIAGNOSIS", key="start_diagnosis_button"):
+            if st.button("MULAI DIAGNOSIS", key="start_diagnosis_button"):
                 st.session_state.page = "Diagnosis"
 
     # Diagnosis Page
@@ -575,15 +575,15 @@ if __name__ == "__main__":
             </div>
             """, unsafe_allow_html=True)
 
-    # About Page
-    elif st.session_state.page == "About":
-        st.markdown("<div id='about'></div>", unsafe_allow_html=True)
+    # Tentang Page
+    elif st.session_state.page == "Tentang":
+        st.markdown("<div id='Tentang'></div>", unsafe_allow_html=True)
         
-        # Styling for the about container
+        # Styling for the Tentang container
         st.markdown(
             """
             <style>
-            .about-container {
+            .Tentang-container {
                 background-color: rgba(255, 255, 255, 0.9);
                 border-radius: 16px;
                 padding: 40px;
@@ -591,20 +591,20 @@ if __name__ == "__main__":
                 margin: 20px 0;
                 text-align: center;
             }
-            .about-title {
+            .Tentang-title {
                 color: #1F77B4;
                 font-size: 32px;
                 font-weight: bold;
                 margin-bottom: 30px;
             }
-            .about-text {
+            .Tentang-text {
                 color: #4A4A4A;
                 font-size: 18px;
                 line-height: 1.6;
                 max-width: 800px;
                 margin: 0 auto;
             }
-            .about-highlight {
+            .Tentang-highlight {
                 color: #1F77B4;
                 font-weight: bold;
             }
@@ -613,13 +613,13 @@ if __name__ == "__main__":
             unsafe_allow_html=True
         )
 
-        # About content
+        # Tentang content
         st.markdown(
             """
-            <div class="about-container">
-                <div class="about-title">About</div>
-                <div class="about-text">
-                    <span class="about-highlight">Respirazzy</span> adalah Sistem Pendukung Keputusan (Decision Support System) berbasis website
+            <div class="Tentang-container">
+                <div class="Tentang-title">Tentang</div>
+                <div class="Tentang-text">
+                    <span class="Tentang-highlight">Respirazzy</span> adalah Sistem Pendukung Keputusan (Decision Support System) berbasis website
                     yang dirancang untuk membantu dalam deteksi dini dan klasifikasi penyakit pada sistem pernapasan menggunakan metode Fuzzy Inference System.
                     Sistem cerdas ini mengintegrasikan gejala yang diinput oleh pengguna dengan untuk menganalisis dan menentukan diagnosis yang paling mungkin dari 10 jenis penyakit pernapasan.
                 </div>
